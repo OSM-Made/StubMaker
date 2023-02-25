@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Defs/SysmoduleInternalDefs.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
