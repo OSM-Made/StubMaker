@@ -1,0 +1,23 @@
+fun:
+	sceAppInstUtilInitialize
+	sceAppInstUtilTerminate
+	sceAppInstUtilGetTitleIdFromPkg
+	sceAppInstUtilGetPrimaryAppSlot
+	sceAppInstUtilAppPrepareOverwritePkg
+	sceAppInstUtilAppInstallPkg
+	sceAppInstUtilAppUnInstall
+	sceAppInstUtilAppUnInstallByUser
+	sceAppInstUtilAppUnInstallPat
+	sceAppInstUtilAppUnInstallTypes
+	sceAppInstUtilAppUnInstallAddcont
+	sceAppInstUtilAppUnInstallTheme
+	sceAppInstUtilAppIsInInstalling
+	sceAppInstUtilAppIsInUpdating
+	sceAppInstUtilAppIsInUpdating2
+	sceAppInstUtilAppExists
+	sceAppInstUtilAppIsInstalledAddcontExist
+	sceAppInstUtilAppGetSize
+	sceAppInstUtilAppRecoverApp
+	sceAppInstUtilGetInstallProgress
+	sceAppInstUtilGetInstallProgressInfo
+	sceAppInstUtilGetInstallProgressInfo2
