@@ -11,6 +11,10 @@ set SDKPath=C:\Program Files (x86)\SCE\ORBIS SDKs\8.000\host_tools\bin\
 "%SDKPath%orbis-clang.exe" -Wall -D__LIB__ -D__ASM__ -c %StubDir%.S -o %StubDir%.S.o
 "%SDKPath%orbis-ld.exe" --oformat=prx --prx-stub-output-dir=%WorkingDir%\..\..\ --Map=%StubDir%.map -o %LibraryName%.sprx %StubDir%.c.o %StubDir%.S.o %StubDir%.emd
 
+Rem Rename all the stubs
+ren %WorkingDir%\..\..\%StubName%_stub.a %StubName%_gen_stub.a
+ren %WorkingDir%\..\..\%StubName%_stub_weak.a %StubName%_gen_stub_weak.a
+
 Rem Clean up.
 del %WorkingDir%\..\%LibraryName%.sprx
 for /R %WorkingDir% %%f in (*) do (if not "%%~xf"==".def" del "%%~f")
