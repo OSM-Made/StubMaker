@@ -7,6 +7,7 @@ extern "C" {
 #endif
 
 	int sceKernelSendNotificationRequest(int device, SceNotificationRequest* req, size_t size, int blocking);
+	int sceKernelGetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetProcessName(const char* name);
 	int sceKernelDebugOutText(int dbg_channel, const char* text, ...);
@@ -31,6 +32,7 @@ extern "C" {
 	int wait4(int wpid, int* status, int options, struct rusage* rusage);
 	int waitpid(int wpid, int* status, int options);
 	int ioctl(int fd, unsigned long request, ...);
+	int getpid(void);
 
 #ifdef __cplusplus
 }

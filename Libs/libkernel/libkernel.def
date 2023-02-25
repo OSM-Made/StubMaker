@@ -6,6 +6,14 @@ fun:
 	__tls_get_addr
 	getargc
 	getargv
+	getpid
+	get_page_table_stats
+	sysctlbyname
+	sysctl
+	ptrace
+	wait4
+	waitpid
+	ioctl
 	sceKernelAddCpumodeEvent
 	sceKernelAddFileEvent
 	sceKernelAddGpuExceptionEvent
