@@ -15,6 +15,7 @@ fun:
 	waitpid
 	ioctl
 	select
+	sysKernelGetUpdVersion
 	sceKernelAddCpumodeEvent
 	sceKernelAddFileEvent
 	sceKernelAddGpuExceptionEvent
