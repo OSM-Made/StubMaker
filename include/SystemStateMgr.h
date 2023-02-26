@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Defs/SystemStateMgrDefs.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

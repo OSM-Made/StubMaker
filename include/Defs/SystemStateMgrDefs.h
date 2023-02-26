@@ -15,7 +15,7 @@ extern "C" {
         WORKING = 1000
     };
 
-	public enum TriggerCode
+	enum TriggerCode
 	{
 		INVALID,
 		MISC,
