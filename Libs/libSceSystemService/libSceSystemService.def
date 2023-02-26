@@ -1,5 +1,4 @@
 fun:
-	sceSystemServiceLaunchWebApp
 	sceSystemServiceAcquireFb0
 	sceSystemServiceActivateHevc
 	sceSystemServiceActivateHevcAbort
