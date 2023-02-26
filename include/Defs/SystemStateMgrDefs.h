@@ -6,7 +6,7 @@ extern "C" {
 
     enum SystemState
     {
-        INVALID = 0,
+        InvalidSystemState = 0,
         INITIALIZING = 10,
         SHUTDOWN_ON_GOING = 100,
         POWER_SAVING = 200,
@@ -17,7 +17,7 @@ extern "C" {
 
 	enum TriggerCode
 	{
-		INVALID,
+		InvalidTrigger,
 		MISC,
 		HDMI_CEC,
 		REMOTE_PLAY = 100,
@@ -29,7 +29,7 @@ extern "C" {
 		NP_EVENT_JOIN,
 		NP_EVENT_INFO_UPDATE,
 		SP_CONNECT
-	}
+	};
 
 #ifdef __cplusplus
 }
