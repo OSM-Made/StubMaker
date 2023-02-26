@@ -8,4 +8,5 @@ for /D %%G in ("%WorkingDir%*") do (
 		makeStub.bat %%~nG %%~nf %%G
 	)
 )
+
 pause
