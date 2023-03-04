@@ -18,3 +18,5 @@ ren %WorkingDir%\..\..\%StubName%_stub_weak.a %StubName%_gen_stub_weak.a
 Rem Clean up.
 del %WorkingDir%\..\%LibraryName%.sprx
 for /R %WorkingDir% %%f in (*) do (if not "%%~xf"==".def" del "%%~f")
+
+pause
