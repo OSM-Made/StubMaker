@@ -24,6 +24,7 @@ extern "C" {
 	void sceKernelIccSetBuzzer(enum BuzzerType mode);
 	int sceKernelGetCpuTemperature(int* Temperature);
 	int sceKernelGetSocSensorTemperature(int, int* Temperature);
+	const char* sceKernelGetFsSandboxRandomWord();
 
 	int get_page_table_stats(int vm, unsigned long long Table, int* totalOut, int* AvailableOut);
 	int sysctlbyname(const char* name, void* oldp, size_t* oldlenp, const void* newp, size_t newlen);
