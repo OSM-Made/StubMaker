@@ -591,6 +591,9 @@ fun:
 	scePthreadSetspecific
 	scePthreadTestcancel
 	scePthreadYield
-
+	clock_gettime
+	fstat
+	unlink
+	
 obj:
 	__stack_chk_guard
