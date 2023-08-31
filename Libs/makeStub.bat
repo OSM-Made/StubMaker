@@ -3,7 +3,7 @@ set StubName=%2
 set WorkingDir=%3
 set OutDir=%4
 set StubDir=%WorkingDir%\%StubName%
-set SDKPath=C:\Program Files (x86)\SCE\ORBIS SDKs\8.000\host_tools\bin\
+set SDKPath=%SCE_ORBIS_SDK_DIR%\host_tools\bin\
 
 "C:\Python27\python.exe" "%~dp0\emd_maker.py" %StubDir%.def
 
