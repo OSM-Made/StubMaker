@@ -39,7 +39,7 @@ ren %OutDir%\..\..\%StubName%_stub.a %StubName%_gen_stub.a
 ren %OutDir%\..\..\%StubName%_stub_weak.a %StubName%_gen_stub_weak.a
 
 REM Clean up.
-REM del %OutDir%\..\%LibraryName%.sprx
+del %OutDir%\..\..\%LibraryName%.sprx
 for /R %OutDir% %%f in (*) do (if not "%%~xf"==".def" del "%%~f")
 
 REM Return from the function
