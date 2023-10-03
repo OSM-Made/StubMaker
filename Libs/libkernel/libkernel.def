@@ -1,4 +1,12 @@
 fun:
+	lseek
+	pthread_setspecific
+	pthread_key_create
+	pthread_getspecific
+	read
+	write
+	close
+	fcntl
 	__error
 	__pthread_cleanup_pop_imp
 	__pthread_cleanup_push_imp

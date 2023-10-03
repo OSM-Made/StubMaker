@@ -35,7 +35,18 @@ extern "C" {
 	MonoThread* mono_thread_get_main(void);
 	void mono_thread_set_main(MonoThread* thread);
 	void mono_thread_detach();
+	MonoString* mono_object_to_string(MonoObject* obj, MonoObject** exc);
 
+	MonoClass* mono_object_get_class(MonoObject* obj);
+	const char* mono_class_get_name(MonoClass* klass);
+
+#define mono_array_addr(array,type,index) ((type*)mono_array_addr_with_size ((array), sizeof (type), (index)))
+#define mono_array_get(array,type,index) ( *(type*)mono_array_addr ((array), type, (index)) ) 
+#define mono_array_set(array,type,index,value)	\
+	do {	\
+		type *__p = (type *) mono_array_addr ((array), type, (index));	\
+		*__p = (value);	\
+	} while (0)
 
 #ifdef __cplusplus
 }

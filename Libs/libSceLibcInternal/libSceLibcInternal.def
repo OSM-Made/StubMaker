@@ -1,4 +1,5 @@
 fun:
+	_Execute_once
 	__absvdi2
 	__absvsi2
 	__absvti2
