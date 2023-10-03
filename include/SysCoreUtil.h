@@ -16,6 +16,8 @@ extern "C" {
 	int sceApplicationGetAppInfoByAppId(int appId, SceAppInfo* info);
 	int sceApplicationSetApplicationFocus(int AppId);
 
+	void sceApplicationSystemReboot();
+
 #ifdef __cplusplus
 }
 #endif
