@@ -6,6 +6,6 @@ Credits to flats for the original project https://github.com/flatz/ps4_stub_lib_
 
 # Build Instructions
 
-1. Requires Official SDK :( so you must specify your SDK path in ``Libs/makeStub.bat``.
+1. Requires Official SDK. :(
 2. Run the ``Libs/build.bat``.
 3. You can now link against these stubs with more function definitions than the official.
