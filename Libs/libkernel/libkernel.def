@@ -1,5 +1,7 @@
 fun:
 	lseek
+	pthread_join
+	pthread_create
 	pthread_setspecific
 	pthread_key_create
 	pthread_getspecific
