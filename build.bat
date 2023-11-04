@@ -19,6 +19,7 @@ for /D %%G in ("%WorkingDir%Libs\*") do (
 )
 
 pause
+goto :EOF
 
 REM Function to perform the external commands
 :BuildLibrary
