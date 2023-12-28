@@ -1,5 +1,5 @@
 fun:
-	_Execute_once
+	_ZSt13_Execute_onceRSt9once_flagPFiPvS1_PS1ES1
 	__absvdi2
 	__absvsi2
 	__absvti2
