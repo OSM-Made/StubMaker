@@ -10,6 +10,7 @@ extern "C" {
 	int sceKernelGetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetProcessName(const char* name);
+	int sceKernelGetThreadName(uint32_t tid, char* out);
 	int sceKernelDebugOutText(int dbg_channel, const char* text, ...);
 	int sceKernelGetProcessName(int pid, char* out);
 	int sysKernelGetUpdVersion(int* vers);

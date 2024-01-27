@@ -89,6 +89,11 @@ extern "C" {
 		ThreeLongDoubleBeeps,
 	};
 
+	typedef struct {
+		size_t Size;                // 0x0
+		char VersionString[0x1C];   // 0x8 (e.g. " 6.720.001" padded with leading zeros)
+		uint32_t Version;           // 0xe.g. 0x06720001
+	} SceKernelSwVersion;
 
 #ifdef __cplusplus
 }
