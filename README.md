@@ -13,7 +13,7 @@ Credits to flats for the original project https://github.com/flatz/ps4_stub_lib_
 
 # Build Requirements
 - Python 2.7
-- Sony PS4 SDK 9.0
+- Sony PS4 SDK
 
 # Installing Python 2.7 using miniconda on Windows 11a
 
