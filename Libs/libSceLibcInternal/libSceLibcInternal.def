@@ -360,6 +360,7 @@ fun:
 	_Thrd_start_with_name
 	_Thrd_start_with_name_attr
 	_Thrd_yield
+	_Thrd_id
 	_Towctrans
 	_Tss_create
 	_Tss_delete
