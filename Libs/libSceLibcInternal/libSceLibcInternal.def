@@ -1796,6 +1796,9 @@ fun:
 	_ZTVSt13basic_filebufIwSt11char_traitsIwEE
 	_ZTVSt13basic_istreamIwSt11char_traitsIwEE
 	_ZTVSt13basic_ostreamIwSt11char_traitsIwEE
+	_ZTVSt5ctypeIcE
+    _ZTVSt5ctypeIwE
+	_ZTISt8bad_cast
 	
 obj:
 	__cleanup
@@ -2201,7 +2204,6 @@ obj:
 	_ZTISt7num_getIwSt19istreambuf_iteratorIwSt11char_traitsIwEEE
 	_ZTISt7num_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEE
 	_ZTISt7num_putIwSt19ostreambuf_iteratorIwSt11char_traitsIwEEE
-	_ZTISt8bad_cast
 	_ZTISt8ios_base
 	_ZTISt8messagesIcE
 	_ZTISt8messagesIwE
@@ -2422,8 +2424,6 @@ obj:
 	_ZTVSt23_Generic_error_category
 	_ZTVSt24_Iostream_error_category
 	_ZTVSt4_Pad
-	_ZTVSt5ctypeIcE
-	_ZTVSt5ctypeIwE
 	_ZTVSt7_MpunctIcE
 	_ZTVSt7_MpunctIwE
 	_ZTVSt7codecvtIcc9_MbstatetE
