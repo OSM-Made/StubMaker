@@ -39,6 +39,7 @@ extern "C" {
 
 	MonoClass* mono_object_get_class(MonoObject* obj);
 	const char* mono_class_get_name(MonoClass* klass);
+	void mono_free(void* obj);
 
 #define mono_array_addr(array,type,index) ((type*)mono_array_addr_with_size ((array), sizeof (type), (index)))
 #define mono_array_get(array,type,index) ( *(type*)mono_array_addr ((array), type, (index)) ) 

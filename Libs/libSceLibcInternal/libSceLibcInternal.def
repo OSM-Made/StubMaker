@@ -1800,6 +1800,7 @@ fun:
 	_ZTVSt5ctypeIcE
     _ZTVSt5ctypeIwE
 	_ZTISt8bad_cast
+	_ZTINSt8ios_base7failureE
 	
 obj:
 	__cleanup
@@ -2105,7 +2106,6 @@ obj:
 	_ZTIN6Dinkum7threads21thread_resource_errorE
 	_ZTINSt6locale5facetE
 	_ZTINSt6locale7_LocimpE
-	_ZTINSt8ios_base7failureE
 	_ZTIPa
 	_ZTIPb
 	_ZTIPc
