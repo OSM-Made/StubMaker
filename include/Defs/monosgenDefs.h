@@ -334,3 +334,24 @@ struct MonoMethodInflated {
 	MonoMethod* declaring;		/* the generic method definition. */
 	MonoGenericContext context;	/* The current instantiation */
 };
+
+typedef struct _MonoException MonoException;
+
+struct _MonoException {
+	MonoObject object;
+	MonoType* type;
+	char* message;
+	MonoString* toString;
+	MonoException* inner_ex;
+	char* help_link;
+	char* class_name;
+	char* stack_trace;
+	char* remote_stack_trace;
+	int remote_stack_index;
+	gpointer dynamic_methods;
+	MonoObject* source;
+	gpointer hresult;
+	gpointer* data;
+	MonoMethod* exception_ctor;
+	gpointer unity_extended_info;
+};
