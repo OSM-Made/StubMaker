@@ -1,4 +1,14 @@
 fun:
+	lseek
+	pthread_join
+	pthread_create
+	pthread_setspecific
+	pthread_key_create
+	pthread_getspecific
+	read
+	write
+	close
+	fcntl
 	__error
 	__pthread_cleanup_pop_imp
 	__pthread_cleanup_push_imp
@@ -591,6 +601,9 @@ fun:
 	scePthreadSetspecific
 	scePthreadTestcancel
 	scePthreadYield
-
+	clock_gettime
+	fstat
+	unlink
+	
 obj:
 	__stack_chk_guard

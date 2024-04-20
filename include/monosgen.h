@@ -28,7 +28,6 @@ extern "C" {
 	MonoString* mono_string_new(MonoDomain* domain, const char* text);
 	char* mono_string_to_utf8(MonoString* string_obj);
 	void* mono_object_unbox(MonoObject* obj);
-
 	MonoObject* mono_object_new(MonoDomain* domain, MonoClass* Klass);
 	void mono_runtime_object_init(MonoObject* this_obj);
 	MonoThread* mono_thread_attach(MonoDomain* domain);
@@ -40,6 +39,7 @@ extern "C" {
 
 	MonoClass* mono_object_get_class(MonoObject* obj);
 	const char* mono_class_get_name(MonoClass* klass);
+	void mono_free(void* obj);
 
 #define mono_array_addr(array,type,index) ((type*)mono_array_addr_with_size ((array), sizeof (type), (index)))
 #define mono_array_get(array,type,index) ( *(type*)mono_array_addr ((array), type, (index)) ) 
@@ -48,7 +48,6 @@ extern "C" {
 		type *__p = (type *) mono_array_addr ((array), type, (index));	\
 		*__p = (value);	\
 	} while (0)
-
 
 #ifdef __cplusplus
 }

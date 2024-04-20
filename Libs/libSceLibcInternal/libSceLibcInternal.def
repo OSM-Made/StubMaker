@@ -1,4 +1,5 @@
 fun:
+	_ZSt13_Execute_onceRSt9once_flagPFiPvS1_PS1_ES1_
 	__absvdi2
 	__absvsi2
 	__absvti2
@@ -359,6 +360,7 @@ fun:
 	_Thrd_start_with_name
 	_Thrd_start_with_name_attr
 	_Thrd_yield
+	_Thrd_id
 	_Towctrans
 	_Tss_create
 	_Tss_delete
@@ -1787,7 +1789,19 @@ fun:
 	y1f
 	yn
 	ynf
-
+	_ZGVZNSt13basic_filebufIcSt11char_traitsIcEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
+	_ZGVZNSt13basic_filebufIwSt11char_traitsIwEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
+	_ZZNSt13basic_filebufIcSt11char_traitsIcEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
+	_ZZNSt13basic_filebufIwSt11char_traitsIwEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
+	_ZTVSt13basic_filebufIcSt11char_traitsIcEE
+	_ZTVSt13basic_filebufIwSt11char_traitsIwEE
+	_ZTVSt13basic_istreamIwSt11char_traitsIwEE
+	_ZTVSt13basic_ostreamIwSt11char_traitsIwEE
+	_ZTVSt5ctypeIcE
+    _ZTVSt5ctypeIwE
+	_ZTISt8bad_cast
+	_ZTINSt8ios_base7failureE
+	
 obj:
 	__cleanup
 	__fe_dfl_env
@@ -1846,8 +1860,6 @@ obj:
 	_ZGVNSt9money_getIwSt19istreambuf_iteratorIwSt11char_traitsIwEEE2idE
 	_ZGVNSt9money_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEE2idE
 	_ZGVNSt9money_putIwSt19ostreambuf_iteratorIwSt11char_traitsIwEEE2idE
-	_ZGVZNSt13basic_filebufIcSt11char_traitsIcEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
-	_ZGVZNSt13basic_filebufIwSt11char_traitsIwEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
 	_ZNSt10moneypunctIcLb0EE2idE
 	_ZNSt10moneypunctIcLb0EE4intlE
 	_ZNSt10moneypunctIcLb1EE2idE
@@ -2094,7 +2106,6 @@ obj:
 	_ZTIN6Dinkum7threads21thread_resource_errorE
 	_ZTINSt6locale5facetE
 	_ZTINSt6locale7_LocimpE
-	_ZTINSt8ios_base7failureE
 	_ZTIPa
 	_ZTIPb
 	_ZTIPc
@@ -2194,7 +2205,6 @@ obj:
 	_ZTISt7num_getIwSt19istreambuf_iteratorIwSt11char_traitsIwEEE
 	_ZTISt7num_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEE
 	_ZTISt7num_putIwSt19ostreambuf_iteratorIwSt11char_traitsIwEEE
-	_ZTISt8bad_cast
 	_ZTISt8ios_base
 	_ZTISt8messagesIcE
 	_ZTISt8messagesIwE
@@ -2401,10 +2411,7 @@ obj:
 	_ZTVSt12out_of_range
 	_ZTVSt12system_error
 	_ZTVSt13bad_exception
-	_ZTVSt13basic_filebufIcSt11char_traitsIcEE
-	_ZTVSt13basic_filebufIwSt11char_traitsIwEE
-	_ZTVSt13basic_istreamIwSt11char_traitsIwEE
-	_ZTVSt13basic_ostreamIwSt11char_traitsIwEE
+	
 	_ZTVSt13runtime_error
 	_ZTVSt14error_category
 	_ZTVSt14overflow_error
@@ -2418,8 +2425,6 @@ obj:
 	_ZTVSt23_Generic_error_category
 	_ZTVSt24_Iostream_error_category
 	_ZTVSt4_Pad
-	_ZTVSt5ctypeIcE
-	_ZTVSt5ctypeIwE
 	_ZTVSt7_MpunctIcE
 	_ZTVSt7_MpunctIwE
 	_ZTVSt7codecvtIcc9_MbstatetE
@@ -2459,8 +2464,6 @@ obj:
 	_ZZNKSt9money_getIwSt19istreambuf_iteratorIwSt11char_traitsIwEEE8_GetmfldERS3_S5_bRSt8ios_basePwE4_Src
 	_ZZNKSt9money_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEE6do_putES3_bRSt8ios_basecRKSsE4_Src
 	_ZZNKSt9money_putIwSt19ostreambuf_iteratorIwSt11char_traitsIwEEE6do_putES3_bRSt8ios_basewRKSbIwS2_SaIwEEE4_Src
-	_ZZNSt13basic_filebufIcSt11char_traitsIcEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
-	_ZZNSt13basic_filebufIwSt11char_traitsIwEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
 	Need_sceLibc
 	optarg
 	opterr

@@ -8,7 +8,7 @@ extern "C" {
 	int sceSystemServiceGetAppIdOfMiniApp();
 	int sceSystemServiceAddLocalProcess(int appId, const char* executablePath, int args, const char* argsv[]);
 	int sceSystemServiceIsAppSuspended(int appId, int* state);
-	int sceSystemServiceKillApp(int, int, int, int);
+	int sceSystemServiceKillApp(int appId, int how, int reason, bool enableCoreDump);
 	int sceSystemServiceKillLocalProcess(int appId, int appLocalPid);
 	int sceSystemServiceLaunchApp(const char* titleId, char* args, int* appParam);
 
