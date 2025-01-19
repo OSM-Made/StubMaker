@@ -4,7 +4,7 @@
 extern "C" {
 #endif
 
-	struct DebugProcessInfo
+	struct SceDebugProcessInfo
 	{
 		int pid;					// 0x00
 		uint64_t unk;				// 0x04
@@ -17,10 +17,10 @@ extern "C" {
 		char _0x48C[0x4A8 - 0x48C];
 	}; // Size = 0x4A8
 
-	static_assert(sizeof(DebugProcessInfo) == 0x4A8, "DebugProcessInfo size is not correct");
+	static_assert(sizeof(SceDebugProcessInfo) == 0x4A8, "SceDebugProcessInfo size is not correct");
 
 #pragma pack(push, 8)
-	struct DebugModuleInfo
+	struct SceDebugModuleInfo
 	{
 		char Name[128];					// 0x00
 		uint64_t ModuleId;				// 0x80
@@ -53,17 +53,37 @@ extern "C" {
 		char Path[1024];				// 0x64C
 	}; // Size = 0xA50
 #pragma pack(pop)
-	static_assert(sizeof(DebugModuleInfo) == 0xA50, "DebugModuleInfo size is not correct");
+	static_assert(sizeof(SceDebugModuleInfo) == 0xA50, "SceDebugModuleInfo size is not correct");
+
+	struct SceDebugVirtualQueryInfo
+	{
+		void* start;		// 0x00
+		void* end;			// 0x08
+		char _0x10[0x8];
+		int protection;		// 0x18
+		char _0x1C[0x30 - 0x1C];
+		char name[32];		// 0x30
+		int unk;			// 0x50
+		int unk2;			// 0x54
+	}; // Size = 0x58
+	static_assert(sizeof(SceDebugVirtualQueryInfo) == 0x58, "SceDebugVirtualQueryInfo size is not correct");
+
+	typedef uint64_t SceDebugModuleId;
 	
 	int sceDebugInit(int a1 = 1);
 	int sceDebugAttachProcess(int pid);
 	int sceDebugDetachProcess(int pid);
 	int sceDebugResumeProcess(int pid, int a2 = 0);
 	int sceDebugGetProcessList(int* pidList, int pidListSize, int* pidCount);
-	int sceDebugGetProcessInfo(int pid, DebugProcessInfo* processInfo);
-
-	int sceDebugGetModuleList(int pid, uint64_t* moduleIdList, int moduleIdListSize, int* moduleIdCount);
-	int sceDebugGetModuleInfo(int pid, uint64_t moduleId, DebugModuleInfo* moduleInfo);
+	int sceDebugGetProcessInfo(int pid, SceDebugProcessInfo* processInfo);
+	int sceDebugWriteProcessMemory(int pid, uint64_t address, size_t size, uint8_t* data, size_t* sizeWritten);
+	int sceDebugReadProcessMemory(int pid, uint64_t addrss, size_t size, uint8_t* data, size_t* sizeRead);
+	int sceDebugGetModuleList(int pid, SceDebugModuleId* moduleIdList, int moduleIdListSize, int* moduleIdCount);
+	int sceDebugGetModuleInfo(int pid, SceDebugModuleId moduleId, SceDebugModuleInfo* moduleInfo);
+	int sceDebugCreateScratchExecutableAreaForPrx(int pid, size_t size, const char* name, uint64_t* addressOut);
+	int sceDebugCreateScratchExecutableArea(int pid, size_t size, uint64_t* addressOut);
+	int sceDebugDestroyScratchExecutableArea(int pid, uint64_t address, size_t size);
+	int sceDebugGetVirtualMemoryInfo(int pid, uint64_t address, SceDebugVirtualQueryInfo* info);
 
 #ifdef __cplusplus
 }
