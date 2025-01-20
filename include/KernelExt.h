@@ -38,6 +38,25 @@ extern "C" {
 	int waitpid(int wpid, int* status, int options);
 	int ioctl(int fd, unsigned long request, ...);
 	int getpid(void);
+	int sceDbgInstallExceptionHandler(int en, SceDbgExceptionHandler handler);
+	int sceDbgRemoveExceptionHandler(int en);
+	int sigaction(int, struct sigaction*, struct sigaction*);
+	int sigemptyset(sigset_t* set);
+
+	// thread
+	int pthread_suspend_user_context_np(thread* thr);
+	int pthread_resume_user_context_np(thread* thr);
+	int pthread_get_user_context_np(thread* thr, SceDbgUcontext* context);
+	int pthread_set_user_context_np(thread* thr, SceDbgUcontext* context);
+	int pthread_suspend_np(thread* thr);
+	int pthread_resume_np(thread* thr);
+	int pthread_suspend_all_np();
+	int pthread_resume_all_np();
+
+	int scePthreadSuspend(thread* thr);
+	int scePthreadResume(thread* thr);
+	int scePthreadSuspendAll();
+	int scePthreadResumeAll();
 
 #ifdef __cplusplus
 }
