@@ -1,6 +1,7 @@
 #pragma once 
 
 #include "Defs/KernelExtDefs.h"
+#include "Defs/PtraceDefs.h"
 
 #ifdef __cplusplus
 extern "C" {
