@@ -602,6 +602,10 @@ fun:
 	scePthreadSetspecific
 	scePthreadTestcancel
 	scePthreadYield
+	scePthreadSuspend
+	scePthreadResume
+	scePthreadSuspendAll
+	scePthreadResumeAll
 	clock_gettime
 	fstat
 	unlink
