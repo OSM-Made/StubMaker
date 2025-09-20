@@ -7,6 +7,7 @@ extern "C" {
 #endif
 
 	int sceNetGetIfList(SceNetIfName ifName_num, SceNetIfEntry* out, int size);
+	int sceNetConfigEtherGetLinkMode(SceNetIfName name, void* a2);
 
 #ifdef __cplusplus
 }

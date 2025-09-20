@@ -165,3 +165,4 @@ fun:
 	sceNetThreadExit
 	sceNetThreadJoin
 	sceNetUsleep
+	sceNetConfigEtherGetLinkMode

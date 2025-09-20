@@ -1,0 +1,10 @@
+fun:
+	sceKernelCheckDipsw
+	sceKernelInitializeDipsw
+	sceKernelIsAssistMode
+	sceKernelIsDevelopmentMode
+	sceKernelIsDisableRazor
+	sceKernelReadDipswData
+	sceKernelSetDipsw
+	sceKernelUnsetDipsw
+	sceKernelWriteDipswData

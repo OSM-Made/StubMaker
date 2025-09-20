@@ -28,7 +28,8 @@ extern "C" {
 		char Name[0x10];				// 0x00
 		char padding0[0x18];			// 0x10
 		int IPAddress;					// 0x28
-		char padding1[0x24];			// 0x2C
+		char padding1[0x20];			// 0x2C
+		int LinkStatus;					// 0x4C
 		unsigned char MacAddress[6];	// 0x50
 		char padding2[0x192];			// 0x56
 	} SceNetIfEntry; //0x1E8

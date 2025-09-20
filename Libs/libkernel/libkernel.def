@@ -1,4 +1,5 @@
 fun:
+	mdbg_call
 	lseek
 	pthread_join
 	pthread_create
@@ -63,7 +64,6 @@ fun:
 	sceKernelCancelAIO
 	sceKernelCancelEventFlag
 	sceKernelCancelSema
-	sceKernelCheckDipsw
 	sceKernelCheckedReleaseDirectMemory
 	sceKernelCheckReachability
 	sceKernelChmod
@@ -296,7 +296,6 @@ fun:
 	sceKernelIccSetCPMode
 	sceKernelIccSetCpuInfoBit
 	sceKernelIccSetDownloadMode
-	sceKernelInitializeDipsw
 	sceKernelInstallExceptionHandler
 	sceKernelInternalGetKmemStatistics
 	sceKernelInternalGetMapStatistics
@@ -309,13 +308,10 @@ fun:
 	sceKernelInternalSuspendDirectMemoryRelease
 	sceKernelIsAddressSanitizerEnabled
 	sceKernelIsAllowedToSelectDvdRegion
-	sceKernelIsAssistMode
 	sceKernelIsAuthenticNeo
 	sceKernelIsCEX
 	sceKernelIsDebuggerAttached
-	sceKernelIsDevelopmentMode
 	sceKernelIsDevKit
-	sceKernelIsDisableRazor
 	sceKernelIsExperimentalBeta
 	sceKernelIsGenuineCEX
 	sceKernelIsGenuineDevKit
@@ -396,7 +392,6 @@ fun:
 	sceKernelRandomizedPath
 	sceKernelRdup
 	sceKernelRead
-	sceKernelReadDipswData
 	sceKernelReadTsc
 	sceKernelReadv
 	sceKernelReboot
@@ -426,7 +421,6 @@ fun:
 	sceKernelSetCoredumpAppInfo
 	sceKernelSetCpumodeGame
 	sceKernelSetDataTransferMode
-	sceKernelSetDipsw
 	sceKernelSetDirectMemoryType
 	sceKernelSetEmergencyErrorLog
 	sceKernelSetEventFlag
@@ -471,7 +465,6 @@ fun:
 	sceKernelTriggerUserEvent
 	sceKernelTruncate
 	sceKernelUnlink
-	sceKernelUnsetDipsw
 	sceKernelUsleep
 	sceKernelUtimes
 	sceKernelUuidCreate
@@ -483,7 +476,6 @@ fun:
 	sceKernelWaitEventFlag
 	sceKernelWaitSema
 	sceKernelWrite
-	sceKernelWriteDipswData
 	sceKernelWriteSdkEventLog
 	sceKernelWritev
 	sceKernelXenterSblock
