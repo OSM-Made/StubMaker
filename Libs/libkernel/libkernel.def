@@ -8,6 +8,7 @@ fun:
 	pthread_getspecific
 	read
 	write
+	open
 	close
 	fcntl
 	__error
@@ -596,6 +597,16 @@ fun:
 	clock_gettime
 	fstat
 	unlink
-	
+	sigaction
+	sigemptyset
+	pthread_get_user_context_np
+	pthread_set_user_context_np
+	pthread_suspend_user_context_np
+	pthread_resume_user_context_np
+	pthread_suspend_np
+	pthread_resume_np
+	pthread_suspend_all_np
+	pthread_resume_all_np
+
 obj:
 	__stack_chk_guard

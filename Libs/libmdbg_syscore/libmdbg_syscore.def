@@ -6,6 +6,7 @@ fun:
 	sceDebugCreateScratchExecutableArea
 	sceDebugDestroyScratchDataArea
 	sceDebugDestroyScratchExecutableArea
+	sceDebugCreateScratchExecutableAreaForPrx
 	sceDebugDetachProcess
 	sceDebugGetApplicationIdByTitleId
 	sceDebugGetApplicationInfo
@@ -64,3 +65,4 @@ fun:
 	sceDebugTriggerCoredump
 	sceDebugWriteProcessMemory
 	sceDebugWriteThreadRegister
+	sceDebugGetVirtualMemoryInfo
