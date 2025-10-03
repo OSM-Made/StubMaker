@@ -29,6 +29,15 @@ extern "C" {
 	int sceKernelGetSocSensorTemperature(int, int* Temperature);
 	const char* sceKernelGetFsSandboxRandomWord();
 	int sceKernelGetSystemSwVersion(SceKernelSwVersion* version);
+	uint64_t sceKernelGetMainSocId();
+	bool sceKernelIsCEX();
+	bool sceKernelIsGenuineCEX();
+	bool sceKernelIsDevKit();
+	bool sceKernelIsGenuineDevKit();
+	bool sceKernelIsTestKit();
+	bool sceKernelIsGenuineTestKit();
+	bool sceKernelIsGenuineN();
+	bool sceKernelGetSystemLevelDebuggerModeForRcmgr();
 
 	int get_page_table_stats(int vm, unsigned long long Table, int* totalOut, int* AvailableOut);
 	int sysctlbyname(const char* name, void* oldp, size_t* oldlenp, const void* newp, size_t newlen);
