@@ -603,6 +603,7 @@ fun:
 	unlink
 	sigaction
 	sigemptyset
+	pthread_create_name_np
 	pthread_get_user_context_np
 	pthread_set_user_context_np
 	pthread_suspend_user_context_np
@@ -611,6 +612,10 @@ fun:
 	pthread_resume_np
 	pthread_suspend_all_np
 	pthread_resume_all_np
+	pthread_getthreadid_np
+	pthread_getname_np
+	pthread_set_name_np
+	pthread_rename_np
 
 obj:
 	__stack_chk_guard
