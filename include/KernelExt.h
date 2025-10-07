@@ -53,7 +53,7 @@ extern "C" {
 	int sigemptyset(sigset_t* set);
 
 	// thread
-	int pthread_create_name_np(thread* thr, pthread_attr* attr, void*(*entry)(void*), void* arg, const char* name, int a5);
+	int pthread_create_name_np(thread* thr, pthread_attr* attr, void*(*entry)(void*), void* arg, const char* name);
 	int pthread_suspend_user_context_np(thread* thr);
 	int pthread_resume_user_context_np(thread* thr);
 	int pthread_get_user_context_np(thread* thr, SceDbgUcontext* context);
