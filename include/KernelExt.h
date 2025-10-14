@@ -38,6 +38,7 @@ extern "C" {
 	bool sceKernelIsGenuineTestKit();
 	bool sceKernelIsGenuineN();
 	bool sceKernelGetSystemLevelDebuggerModeForRcmgr();
+	int sceKernelError(int error);
 
 	int get_page_table_stats(int vm, unsigned long long Table, int* totalOut, int* AvailableOut);
 	int sysctlbyname(const char* name, void* oldp, size_t* oldlenp, const void* newp, size_t newlen);
