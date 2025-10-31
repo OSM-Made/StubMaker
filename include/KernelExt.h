@@ -37,6 +37,7 @@ extern "C" {
 	int waitpid(int wpid, int* status, int options);
 	int ioctl(int fd, unsigned long request, ...);
 	int getpid(void);
+	int mdbg_call(void* arg1, void* arg2, void* arg3);
 
 #ifdef __cplusplus
 }
