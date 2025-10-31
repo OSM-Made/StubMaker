@@ -4,7 +4,7 @@
 extern "C" {
 #endif
 
-	typedef struct sceShellCoreUtilLaunchParam
+	struct sceShellCoreUtilLaunchParam
 	{
 		uint32_t size;
 		uint32_t userId;

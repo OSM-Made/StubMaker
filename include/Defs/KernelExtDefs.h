@@ -1,5 +1,7 @@
 #pragma once
 #include <stdint.h>
+#include <kernel.h>
+#include <pthread.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -94,6 +96,79 @@ extern "C" {
 		char VersionString[0x1C];   // 0x8 (e.g. " 6.720.001" padded with leading zeros)
 		uint32_t Version;           // 0xe.g. 0x06720001
 	} SceKernelSwVersion;
+
+	typedef struct __mcontext {
+		__register_t	mc_onstack;
+		__register_t	mc_rdi;
+		__register_t	mc_rsi;
+		__register_t	mc_rdx;
+		__register_t	mc_rcx;
+		__register_t	mc_r8;
+		__register_t	mc_r9;
+		__register_t	mc_rax;
+		__register_t	mc_rbx;
+		__register_t	mc_rbp;
+		__register_t	mc_r10;
+		__register_t	mc_r11;
+		__register_t	mc_r12;
+		__register_t	mc_r13;
+		__register_t	mc_r14;
+		__register_t	mc_r15;
+		__uint32_t	mc_trapno;
+		__uint16_t	mc_fs;
+		__uint16_t	mc_gs;
+		__register_t	mc_addr;
+		__uint32_t	mc_flags;
+		__uint16_t	mc_es;
+		__uint16_t	mc_ds;
+		__register_t	mc_err;
+		__register_t	mc_rip;
+		__register_t	mc_cs;
+		__register_t	mc_rflags;
+		__register_t	mc_rsp;
+		__register_t	mc_ss;
+		long	mc_len;
+		long	mc_fpformat;
+		long	mc_ownedfp;
+		long	mc_fpstate[104] __aligned(64);
+		__register_t	mc_fsbase;
+		__register_t	mc_gsbase;
+		long	mc_spare[6];
+	} mcontext_t;
+	typedef struct __ucontext {
+		sigset_t	uc_sigmask;
+		mcontext_t	uc_mcontext;
+		struct __ucontext* uc_link;
+		stack_t		uc_stack;
+		int		uc_flags;
+		int		__spare__[4];
+	} ucontext_t;
+	typedef ucontext_t SceDbgUcontext;
+	typedef void (*SceDbgExceptionHandler)(int, SceDbgUcontext*);
+	struct pthread_attr
+	{
+		int	sched_policy;
+		int	sched_inherit;
+		int	prio;
+		int	suspend;
+#define	THR_STACK_USER		0x100	/* 0xFF reserved for <pthread.h> */
+		int	flags;
+		void* stackaddr_attr;
+		size_t	stacksize_attr;
+		size_t	guardsize_attr;
+		cpuset_t* cpuset;
+		size_t	cpusetsize;
+	};
+	struct thread
+	{
+		int tid;
+		char _0x04[0x34];
+		thread* next;
+		char _0x40[0x40];
+		void* (*routine)(void*);
+		void* arg;
+		pthread_attr attr;
+	};
 
 #ifdef __cplusplus
 }

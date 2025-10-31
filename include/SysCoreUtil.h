@@ -15,6 +15,7 @@ extern "C" {
 	int sceApplicationSuspend(int AppId);
 	int sceApplicationGetAppInfoByAppId(int appId, SceAppInfo* info);
 	int sceApplicationSetApplicationFocus(int AppId);
+	int sceApplicationNotifyVshReady(int status);
 
 	void sceApplicationSystemReboot();
 

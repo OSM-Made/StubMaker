@@ -1,6 +1,7 @@
 #pragma once 
 
 #include "Defs/KernelExtDefs.h"
+#include "Defs/PtraceDefs.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,6 +29,16 @@ extern "C" {
 	int sceKernelGetSocSensorTemperature(int, int* Temperature);
 	const char* sceKernelGetFsSandboxRandomWord();
 	int sceKernelGetSystemSwVersion(SceKernelSwVersion* version);
+	uint64_t sceKernelGetMainSocId();
+	bool sceKernelIsCEX();
+	bool sceKernelIsGenuineCEX();
+	bool sceKernelIsDevKit();
+	bool sceKernelIsGenuineDevKit();
+	bool sceKernelIsTestKit();
+	bool sceKernelIsGenuineTestKit();
+	bool sceKernelIsGenuineN();
+	bool sceKernelGetSystemLevelDebuggerModeForRcmgr();
+	int sceKernelError(int error);
 
 	int get_page_table_stats(int vm, unsigned long long Table, int* totalOut, int* AvailableOut);
 	int sysctlbyname(const char* name, void* oldp, size_t* oldlenp, const void* newp, size_t newlen);
@@ -38,6 +49,25 @@ extern "C" {
 	int ioctl(int fd, unsigned long request, ...);
 	int getpid(void);
 	int mdbg_call(void* arg1, void* arg2, void* arg3);
+	int sceDbgInstallExceptionHandler(int en, SceDbgExceptionHandler handler);
+	int sceDbgRemoveExceptionHandler(int en);
+	int sigaction(int, struct sigaction*, struct sigaction*);
+	int sigemptyset(sigset_t* set);
+
+	// thread
+	int pthread_suspend_user_context_np(thread* thr);
+	int pthread_resume_user_context_np(thread* thr);
+	int pthread_get_user_context_np(thread* thr, SceDbgUcontext* context);
+	int pthread_set_user_context_np(thread* thr, SceDbgUcontext* context);
+	int pthread_suspend_np(thread* thr);
+	int pthread_resume_np(thread* thr);
+	int pthread_suspend_all_np();
+	int pthread_resume_all_np();
+
+	int scePthreadSuspend(thread* thr);
+	int scePthreadResume(thread* thr);
+	int scePthreadSuspendAll();
+	int scePthreadResumeAll();
 
 #ifdef __cplusplus
 }

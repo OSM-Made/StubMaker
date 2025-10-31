@@ -1801,6 +1801,7 @@ fun:
     _ZTVSt5ctypeIwE
 	_ZTISt8bad_cast
 	_ZTINSt8ios_base7failureE
+	sincosf
 	
 obj:
 	__cleanup
