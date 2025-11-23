@@ -66,7 +66,7 @@ extern "C" {
 	int pthread_resume_all_np();
 	int pthread_getthreadid_np();
 	int pthread_getname_np(thread* thr, char* out);
-	int pthread_set_name_np();
+	int pthread_set_name_np(thread* thr, const char* name);
 	int pthread_rename_np(thread* thr, const char* name);
 	
 	int scePthreadSetName(thread* thr, const char* name);
