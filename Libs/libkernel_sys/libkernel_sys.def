@@ -1,4 +1,5 @@
 fun:
+	gettimeofday
 	__error
 	__pthread_cleanup_pop_imp
 	__pthread_cleanup_push_imp

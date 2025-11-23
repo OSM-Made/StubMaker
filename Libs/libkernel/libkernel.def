@@ -1,4 +1,5 @@
 fun:
+	gettimeofday
 	mdbg_call
 	lseek
 	pthread_join
