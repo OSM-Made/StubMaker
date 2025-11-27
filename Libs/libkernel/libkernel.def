@@ -1,6 +1,7 @@
 fun:
 	gettimeofday
 	mdbg_call
+	mdbg_service
 	lseek
 	pthread_join
 	pthread_create

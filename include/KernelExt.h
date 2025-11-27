@@ -49,6 +49,7 @@ extern "C" {
 	int ioctl(int fd, unsigned long request, ...);
 	int getpid(void);
 	int mdbg_call(void* arg1, void* arg2, void* arg3);
+	int mdbg_service(int arg1, void* arg2, void* arg3);
 	int sceDbgInstallExceptionHandler(int en, SceDbgExceptionHandler handler);
 	int sceDbgRemoveExceptionHandler(int en);
 	int sigaction(int, struct sigaction*, struct sigaction*);
