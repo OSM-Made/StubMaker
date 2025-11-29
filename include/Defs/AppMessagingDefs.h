@@ -44,7 +44,7 @@ extern "C" {
 #define SCE_APP_MESSAGING_EVENT_WEBBROWSER_CLOSED                       0x0000800000000000
 #define SCE_APP_MESSAGING_EVENT_CONTROLLER_SETTINGS_CLOSED              0x0000400000000000
 
-    struct AppMessage
+    struct SceAppMessage
     {
         int Sender;
         uint32_t MessageType;
