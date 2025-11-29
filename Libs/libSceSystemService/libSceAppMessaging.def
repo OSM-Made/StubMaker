@@ -1,0 +1,9 @@
+func:
+	sceAppMessagingClearEventFlag
+	sceAppMessagingReceiveMsg
+	sceAppMessagingSendMsg
+	sceAppMessagingSendMsgToShellCore
+	sceAppMessagingSendMsgToShellUI
+	sceAppMessagingSetEventFlag
+	sceAppMessagingTryGetEventFlag
+	sceAppMessagingTryReceiveMsg
