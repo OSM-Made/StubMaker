@@ -1,4 +1,4 @@
-func:
+fun:
 	sceAppMessagingClearEventFlag
 	sceAppMessagingReceiveMsg
 	sceAppMessagingSendMsg
