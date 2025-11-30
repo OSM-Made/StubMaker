@@ -48,9 +48,9 @@ extern "C" {
     {
         int Sender;
         uint32_t MessageType;
-        char Message[8192];
-        uint32_t MessageSize;
-        uint64_t TimeStamp;
+        char Payload[8192];
+        uint32_t PayloadSize;
+		uint64_t TimeStamp;     // Monotonic time in microseconds
     };
 
 #ifdef __cplusplus
