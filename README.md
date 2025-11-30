@@ -52,7 +52,7 @@ You can now link your projects against these stubs for enhanced functionality.
 ```
 StubMaker/
 ├── build.py              # Main build script (replaces build.bat + emd_maker.py)
-├── include/              # C/C++ header files for exposed APIs
+├── Include/              # C/C++ header files for exposed APIs
 │   ├── Defs/             # Definition headers with constants and enums
 │   │   ├── AppMessagingDefs.h
 │   │   ├── KernelExtDefs.h
