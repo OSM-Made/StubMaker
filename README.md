@@ -33,7 +33,7 @@ The script will:
 1. Clean up any existing `.a` files
 2. Process all `.def` definition files in the `Libs/` directory
 3. Generate assembly (`.S`), C (`.c`), and export metadata (`.emd`) files
-4. Compile and link stub libraries using the Orbis SDK toolchain
+4. Compile and link stub libraries using the PS4 SDK toolchain
 5. Output all generated stub libraries to the `Build/` directory
 
 ### Output
