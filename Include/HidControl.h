@@ -1,12 +1,13 @@
 #pragma once
 
+#include "Defs/HidControlDefs.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-	int sceHidControlInit();
-    int sceHidControlGetBatteryState(int deviceId, ...);
-    // Can we use sceHidControlGetBatteryState to get the battery level of the controller ?
+    int sceHidControlInit();
+    int sceHidControlGetBatteryState(int deviceId, SceHidBatteryState* state);
 
 #ifdef __cplusplus
 }
