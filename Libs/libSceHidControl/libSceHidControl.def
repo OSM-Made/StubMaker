@@ -1,3 +1,4 @@
 fun:
     sceHidControlInit
     sceHidControlGetBatteryState
+    sceHidControlGetDeviceName

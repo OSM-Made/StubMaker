@@ -8,6 +8,7 @@ extern "C" {
 
     int sceHidControlInit();
     int sceHidControlGetBatteryState(int deviceId, SceHidBatteryState* state);
+    int sceHidControlGetDeviceName(int deviceId, char* out);
 
 #ifdef __cplusplus
 }
