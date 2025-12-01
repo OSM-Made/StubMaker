@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-	int sceKernelSendNotificationRequest(int device, SceNotificationRequest* req, size_t size, int blocking);
+	int sceKernelSendNotificationRequest(int device, void* req, size_t size, int blocking);
 	int sceKernelGetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetProcessName(const char* name);
@@ -49,12 +49,14 @@ extern "C" {
 	int ioctl(int fd, unsigned long request, ...);
 	int getpid(void);
 	int mdbg_call(void* arg1, void* arg2, void* arg3);
+	int mdbg_service(int arg1, void* arg2, void* arg3);
 	int sceDbgInstallExceptionHandler(int en, SceDbgExceptionHandler handler);
 	int sceDbgRemoveExceptionHandler(int en);
 	int sigaction(int, struct sigaction*, struct sigaction*);
 	int sigemptyset(sigset_t* set);
 
 	// thread
+	int pthread_create_name_np(thread* thr, pthread_attr* attr, void*(*entry)(void*), void* arg, const char* name);
 	int pthread_suspend_user_context_np(thread* thr);
 	int pthread_resume_user_context_np(thread* thr);
 	int pthread_get_user_context_np(thread* thr, SceDbgUcontext* context);
@@ -63,7 +65,12 @@ extern "C" {
 	int pthread_resume_np(thread* thr);
 	int pthread_suspend_all_np();
 	int pthread_resume_all_np();
-
+	int pthread_getthreadid_np();
+	int pthread_getname_np(thread* thr, char* out);
+	int pthread_set_name_np(thread* thr, const char* name);
+	int pthread_rename_np(thread* thr, const char* name);
+	
+	int scePthreadSetName(thread* thr, const char* name);
 	int scePthreadSuspend(thread* thr);
 	int scePthreadResume(thread* thr);
 	int scePthreadSuspendAll();
