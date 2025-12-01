@@ -1,4 +1,6 @@
 fun:
+	kevent
+	kqueue
 	gettimeofday
 	__error
 	__pthread_cleanup_pop_imp
