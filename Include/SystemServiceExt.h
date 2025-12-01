@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Defs//LncUtilDefs.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -10,7 +12,7 @@ extern "C" {
 	int sceSystemServiceIsAppSuspended(int appId, int* state);
 	int sceSystemServiceKillApp(int appId, int how, int reason, bool enableCoreDump);
 	int sceSystemServiceKillLocalProcess(int appId, int appLocalPid);
-	int sceSystemServiceLaunchApp(const char* titleId, char* args, int* appParam);
+	int sceSystemServiceLaunchApp(const char* titleId, char* args, LaunchAppParam* appParam);
 
 #ifdef __cplusplus
 }

@@ -1,39 +1,82 @@
 # StubMaker
-Windows port of flatz ps4_stub_lib_maker.
 
-# Credits
-Credits to flats for the original project https://github.com/flatz/ps4_stub_lib_maker_v2 
+Windows improvement of flatz's PS4 stub library maker. Creates linkable stub libraries that expose undocumented functions and internal APIs not available in the official PS4 SDK. Supports both standard and packed .prx formats where multiple libraries are combined into a single module.
 
-# Build Instructions
+## Requirements
 
-1. Requires Official SDK :( so you must specify your SDK path in ``Libs/makeStub.bat``.
-2. Run the ``build.bat``.
-3. All of the generated stubs will be in the root of the repo.
-4. You can now link against these stubs with more function definitions than the official.
+- **Python 3.6+** (pathlib and modern syntax support required)
+- **Sony PS4 SDK** with `SCE_ORBIS_SDK_DIR` environment variable set
+- **Windows** (uses orbis-clang.exe and orbis-ld.exe from SDK)
 
-# Build Requirements
-- Python 2.7
-- Sony PS4 SDK
+## Setup
 
-# Installing Python 2.7 using miniconda on Windows 11a
+1. **Install Python 3.6 or higher**
+   - Download from [python.org](https://www.python.org/downloads/)
+   - Or use your preferred package manager
 
-1. Download and install Miniconda: You can download Miniconda from the [offical website](https://docs.conda.io/projects/miniconda/en/latest/)
-2. During the installation process, you'll be prompted to select environment variables. Choose the following options:
-    - Add Miniconda3 to my PATH environment variable
-    - Register Miniconda3 as my default Python 3.11
-    - Clear the package cache upon completion 
+2. **Set SDK Environment Variable**
+   - Ensure `SCE_ORBIS_SDK_DIR` is set to your Sony PS4 SDK installation path
+   - Verify with: `echo %SCE_ORBIS_SDK_DIR%` (Command Prompt) or `$env:SCE_ORBIS_SDK_DIR` (PowerShell)
 
-3. Verify the Conda version by running `conda --version`
-in your terminal.
+3. **Verify SDK Tools**
+   - The build script requires `orbis-clang.exe` and `orbis-ld.exe` in `%SCE_ORBIS_SDK_DIR%\host_tools\bin\`
 
-4. Create a Python 2.7 environment named "py27" with the command: `conda create --name py27`
+## Usage
 
-5. Start the Conda environment in terminal by running `conda init powershell` 
+Run the build script:
 
-6. Restart your terminal to ensure that the changes take effect.
+```bash
+python build.py
+```
 
-7. Check the list of Conda environments using the command: `conda env list`
+The script will:
+1. Clean up any existing `.a` files
+2. Process all `.def` definition files in the `Libs/` directory
+3. Generate assembly (`.S`), C (`.c`), and export metadata (`.emd`) files
+4. Compile and link stub libraries using the PS4 SDK toolchain
+5. Output all generated stub libraries to the `Build/` directory
 
-8. Activate the Python 2.7 environment you created with: `conda activate py27`
+### Output
 
-9. Install Python 2.7 in your "py27" environment using the command: `conda install python=2.7.18`
+Built stub libraries will be located in:
+```
+Build/
+├── <stub_name>_gen_stub.a
+└── <stub_name>_gen_stub_weak.a
+```
+
+You can now link your projects against these stubs for enhanced functionality.
+
+## Project Structure
+
+```
+StubMaker/
+├── build.py              # Main build script (replaces build.bat + emd_maker.py)
+├── Include/              # C/C++ header files for exposed APIs
+│   ├── Defs/             # Definition headers with constants and enums
+│   │   ├── AppMessagingDefs.h
+│   │   ├── KernelExtDefs.h
+│   │   └── ...
+│   ├── AppMessaging.h    # App messaging system functions
+│   ├── KernelExt.h       # Extended kernel functions
+│   ├── mdbg.h            # Debug functions
+│   ├── NetExt.h          # Network extensions
+│   └── ...               # Additional library headers
+├── Libs/                 # Library definition files (.def)
+│   ├── libSceNet/
+│   │   └── libSceNet.def
+│   ├── libkernel/
+│   │   └── libkernel.def
+│   ├── libSceSystemService/  # Example: packed .prx with multiple libs
+│   │   ├── libSceAppMessaging.def
+│   │   ├── libSceSystemService.def
+│   │   └── ...
+│   └── ...
+└── Build/                # Output directory for built stub libraries
+    ├── <stub_name>_gen_stub.a
+    └── <stub_name>_gen_stub_weak.a
+```
+
+## Credits
+
+Credits to [flatz](https://github.com/flatz) for the original [ps4_stub_lib_maker_v2](https://github.com/flatz/ps4_stub_lib_maker_v2) project. This is a Windows-compatible port with build process improvements.
