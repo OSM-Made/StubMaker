@@ -1,4 +1,6 @@
 fun:
+	kevent
+	kqueue
 	gettimeofday
 	mdbg_call
 	mdbg_service
