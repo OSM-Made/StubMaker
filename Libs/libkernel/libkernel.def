@@ -1,4 +1,6 @@
 fun:
+	kevent
+	kqueue
 	mdbg_call
 	lseek
 	pthread_join

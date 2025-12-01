@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-	int sceKernelSendNotificationRequest(int device, SceNotificationRequest* req, size_t size, int blocking);
+	int sceKernelSendNotificationRequest(int device, void* req, size_t size, int blocking);
 	int sceKernelGetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetProcessName(const char* name);
