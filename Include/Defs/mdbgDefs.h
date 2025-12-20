@@ -4,16 +4,31 @@
 extern "C" {
 #endif
 
+	struct ExceptionHandlingFrame
+	{
+		uint64_t HeaderAddress;	// 0x00
+		size_t HeaderSize;		// 0x08
+		uint64_t FrameAddress;	// 0x10
+		size_t FrameSize;		// 0x18
+	}; // Size = 0x20
+
 	struct SceDebugProcessInfo
 	{
-		int pid;					// 0x00
-		uint64_t unk;				// 0x04
-		int flags;					// 0x10
-		char Name[32];				// 0x14
-		char _0x34[0x80 - 0x34];
-		char ExecutablePath[1024];	// 0x80
-		char _0x480[0x8];
-		int AppId;					// 0x488
+		int pid;						// 0x00
+		char _0x04[0xC];
+		int Attribute;					// 0x10
+		char Name[32];					// 0x14
+		char _0x34[0x4];
+		uint64_t EntryPoint;			// 0x38
+		char FingerPrint[20];			// 0x40
+		int ppid;						// 0x54
+		uint32_t MainThreadId;			// 0x58
+		char _0x58[0x4];
+		ExceptionHandlingFrame EHFrame;	// 0x60
+		char ExecutablePath[1024];		// 0x80
+		int AffinityMask;				// 0x480
+		char _0x484[0x4];
+		int AppId;						// 0x488
 		char _0x48C[0x4A8 - 0x48C];
 	}; // Size = 0x4A8
 
