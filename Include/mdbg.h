@@ -10,6 +10,7 @@ extern "C" {
 	int sceDebugNoStopChildProcesses(int pid);
 	int sceDebugStopOnDLLoad(int pid);
 	int sceDebugNoStopOnDLLoad(int pid);
+	int sceDebugKillProcess(int pid);
 	int sceDebugAttachProcess(int pid);
 	int sceDebugDetachProcess(int pid);
 	int sceDebugSuspendProcess(int pid);
