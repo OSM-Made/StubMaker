@@ -34,38 +34,60 @@ extern "C" {
 
 	static_assert(sizeof(SceDebugProcessInfo) == 0x4A8, "SceDebugProcessInfo size is not correct");
 
+	typedef enum SceDebugModuleSegmentInfoProtection 
+	{
+		SCE_DEBUG_PROT_CPU_READ = 0x01,
+		SCE_DEBUG_PROT_CPU_RW = 0x02,
+		SCE_DEBUG_PROT_CPU_EXEC = 0x04
+	} SceDbgModuleSegmentInfoProtection;
+
+	typedef enum SceDebugModuleStatus
+	{
+		MODULE_STATUS_LOADED,
+		MODULE_STATUS_STARTING,
+		MODULE_STATUS_LIVE,
+		MODULE_STATUS_STOPPING,
+		MODULE_STATUS_STOPPED
+	} SceDebugModuleStatus;
+
+	struct SceDebugModuleSegmentInfo
+	{
+		uint64_t StartAddress;							// 0x00
+		size_t Size;									// 0x08
+		SceDbgModuleSegmentInfoProtection Attributes;	// 0x10
+	};	// Size = 0x18
+	static_assert(sizeof(SceDebugModuleSegmentInfo) == 0x18, "SceDebugModuleInfo size is not correct");
+
 #pragma pack(push, 8)
 	struct SceDebugModuleInfo
 	{
-		char Name[128];					// 0x00
-		uint64_t ModuleId;				// 0x80
+		char Name[128];							// 0x00
+		uint64_t ModuleId;						// 0x80
 		char _0x88[0x8];
-		int SdkVersion;					// 0x90
-		int SomeFlagThing;				// 0x94
-		int RefCount;					// 0x98
+		int SdkVersion;							// 0x90
+		int TlsIndex;							// 0x94
+		int ReferenceCount;						// 0x98
 		char _0x9C[0x4];
-		int status;						// 0xA0
+		SceDebugModuleStatus status;			// 0xA0
 		char _0xA4[0x4];
-		uint64_t init;					// 0xA8
-		uint64_t fini;					// 0xB0
-		uint64_t EHFrameHDR;			// 0xB8
-		uint64_t EHFrameHDRSize;		// 0xC0
-		uint64_t EHFrame;				// 0xC8
-		uint64_t EHFrameSize;			// 0xD0
-		uint64_t MapBase;				// 0xD8
-		size_t TextSize;				// 0xE0
-		char _0xE8[0x8];
-		uint64_t DataBase;				// 0xF0
-		size_t DataSize;				// 0xF8
-		char _0x100[0xA0];
-		uint64_t RequiredModules[128];	// 0x1A0
-		uint64_t RequiredModuleCount;	// 0x5A0
-		char _0x5A8[0x8];
-		char FingerPrint[20];			// 0x5B0
+		uint64_t StartFunction;					// 0xA8
+		uint64_t StopFunction;					// 0xB0
+		uint64_t EHFrameHDR;					// 0xB8
+		uint64_t EHFrameHDRSize;				// 0xC0
+		uint64_t EHFrame;						// 0xC8
+		uint64_t EHFrameSize;					// 0xD0
+		SceDebugModuleSegmentInfo Segments[8];	// 0xD8
+		int SegmentCount;						// 0x198
+		char _0x19C[0x4];
+		uint64_t RequiredModules[128];			// 0x1A0
+		uint64_t RequiredModuleCount;			// 0x5A0
+		int Version;							// 0x5A8 - In big endian.
+		char _0x5A8[0x4];
+		char FingerPrint[20];					// 0x5B0
 		char _0x5C4[0x4];
-		char OriginalName[128];			// 0x5C8
-		int TlsIndex;					// 0x648
-		char Path[1024];				// 0x64C
+		char OriginalFile[128];					// 0x5C8
+		char _0x648[0x4];
+		char LoadPath[1024];					// 0x64C
 	}; // Size = 0xA50
 #pragma pack(pop)
 	static_assert(sizeof(SceDebugModuleInfo) == 0xA50, "SceDebugModuleInfo size is not correct");
