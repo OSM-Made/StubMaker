@@ -22,7 +22,7 @@ extern "C" {
 	int sceDebugReadProcessMemory(int pid, uint64_t addrss, size_t size, uint8_t* data, size_t* sizeRead);
 	int sceDebugGetModuleList(int pid, SceDebugModuleId* moduleIdList, int moduleIdListSize, int* moduleIdCount);
 	int sceDebugGetModuleInfo(int pid, SceDebugModuleId moduleId, SceDebugModuleInfo* moduleInfo);
-	int sceDebugGetModuleMetaData(int pid, SceDebugModuleId moduleId, void* metaData, size_t metaDataSize, size_t** actualMetaData);
+	int sceDebugGetModuleMetaData(int pid, SceDebugModuleId moduleId, void* metaData, size_t metaDataSize, size_t* actualMetaData);
 	int sceDebugCreateScratchExecutableAreaForPrx(int pid, size_t size, const char* name, uint64_t* addressOut);
 	int sceDebugCreateScratchExecutableArea(int pid, size_t size, uint64_t* addressOut);
 	int sceDebugDestroyScratchExecutableArea(int pid, uint64_t address, size_t size);

@@ -68,7 +68,7 @@ extern "C" {
 		int TlsIndex;							// 0x94
 		int ReferenceCount;						// 0x98
 		char _0x9C[0x4];
-		SceDebugModuleStatus status;			// 0xA0
+		SceDebugModuleStatus Status;			// 0xA0
 		char _0xA4[0x4];
 		uint64_t StartFunction;					// 0xA8
 		uint64_t StopFunction;					// 0xB0
