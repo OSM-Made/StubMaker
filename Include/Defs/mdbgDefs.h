@@ -43,12 +43,27 @@ extern "C" {
 
 	typedef enum SceDebugModuleStatus
 	{
-		MODULE_STATUS_LOADED,
-		MODULE_STATUS_STARTING,
-		MODULE_STATUS_LIVE,
-		MODULE_STATUS_STOPPING,
-		MODULE_STATUS_STOPPED
+		MODULE_STATUS_LOADED = 1,
+		MODULE_STATUS_STARTING = 2,
+		MODULE_STATUS_LIVE = 4,
+		MODULE_STATUS_STOPPING = 8,
+		MODULE_STATUS_STOPPED = 16
 	} SceDebugModuleStatus;
+
+	typedef enum SceDebugModuleType
+	{
+		MODULE_TYPE_DYNLIB,
+		MODULE_TYPE_FIXED_ELF
+	} SceDebugModuleType;
+
+	typedef enum SceDebugModuleFlags
+	{
+		MODULE_FLAGS_ORIGIN = 1,
+		MODULE_FLAGS_SYMBOLIC = 2,
+		MODULE_FLAGS_TEXT_REL = 4,
+		MODULE_FLAGS_BIND_NOW = 8,
+		MODULE_FLAGS_STATIC_TLS = 16
+	} SceDebugModuleFlags;
 
 	struct SceDebugModuleSegmentInfo
 	{
@@ -63,9 +78,10 @@ extern "C" {
 	{
 		char Name[128];							// 0x00
 		uint64_t ModuleId;						// 0x80
-		char _0x88[0x8];
+		SceDebugModuleFlags Flags;				// 0x88
+		char _0x8C[0x4];
 		int SdkVersion;							// 0x90
-		int TlsIndex;							// 0x94
+		SceDebugModuleType Type;				// 0x94
 		int ReferenceCount;						// 0x98
 		char _0x9C[0x4];
 		SceDebugModuleStatus Status;			// 0xA0
