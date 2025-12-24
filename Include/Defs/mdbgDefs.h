@@ -102,7 +102,7 @@ extern "C" {
 		char FingerPrint[20];					// 0x5B0
 		char _0x5C4[0x4];
 		char OriginalFile[128];					// 0x5C8
-		char _0x648[0x4];
+		int HasLoadPath;						// 0x648 - ? Not 100% sure since its zero when LoadPath is null. 
 		char LoadPath[1024];					// 0x64C
 	}; // Size = 0xA50
 #pragma pack(pop)
