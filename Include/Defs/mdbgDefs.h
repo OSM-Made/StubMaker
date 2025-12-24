@@ -52,8 +52,8 @@ extern "C" {
 
 	typedef enum SceDebugModuleType
 	{
-		MODULE_TYPE_DYNLIB,
-		MODULE_TYPE_FIXED_ELF
+		MODULE_TYPE_FIXED_ELF,
+		MODULE_TYPE_DYNLIB
 	} SceDebugModuleType;
 
 	typedef enum SceDebugModuleFlags
