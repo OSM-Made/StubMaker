@@ -332,17 +332,20 @@ def main():
 
         if success:
             print("\n✓ Build completed successfully!")
+            input("\nPress Enter to exit...")
             return 0
         else:
             print("\n✗ Build completed with errors.")
+            input("\nPress Enter to exit...")
             return 1
 
     except Exception as e:
         print(f"\n✗ ERROR: {e}")
         import traceback
         traceback.print_exc()
+        input("\nPress Enter to exit...")
         return 1
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
