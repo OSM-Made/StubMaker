@@ -35,6 +35,12 @@ typedef gint32 mono_array_lower_bound_t;
 #   define USE_UINT8_BIT_FIELD(type, field) type field
 #endif
 
+typedef struct _GPtrArray GPtrArray;
+struct _GPtrArray {
+	gpointer* pdata;
+	guint len;
+};
+
 struct MonoDomain;
 struct MonoAssembly;
 struct MonoImage;
@@ -54,13 +60,53 @@ struct MonoClassRuntimeInfo;
 struct MonoClassExt;
 struct MonoArrayType;
 struct MonoGenericParam;
-typedef int MonoTypeEnum;
-
 struct MonoCustomMod;
 struct MonoClass;
 struct MonoType;
 struct MonoMethod;
 struct MonoVTable;
+
+typedef enum
+{
+	MONO_TYPE_END = 0x00,       /* End of List */
+	MONO_TYPE_VOID = 0x01,
+	MONO_TYPE_BOOLEAN = 0x02,
+	MONO_TYPE_CHAR = 0x03,
+	MONO_TYPE_I1 = 0x04,
+	MONO_TYPE_U1 = 0x05,
+	MONO_TYPE_I2 = 0x06,
+	MONO_TYPE_U2 = 0x07,
+	MONO_TYPE_I4 = 0x08,
+	MONO_TYPE_U4 = 0x09,
+	MONO_TYPE_I8 = 0x0a,
+	MONO_TYPE_U8 = 0x0b,
+	MONO_TYPE_R4 = 0x0c,
+	MONO_TYPE_R8 = 0x0d,
+	MONO_TYPE_STRING = 0x0e,
+	MONO_TYPE_PTR = 0x0f,       /* arg: <type> token */
+	MONO_TYPE_BYREF = 0x10,       /* arg: <type> token */
+	MONO_TYPE_VALUETYPE = 0x11,       /* arg: <type> token */
+	MONO_TYPE_CLASS = 0x12,       /* arg: <type> token */
+	MONO_TYPE_VAR = 0x13,	   /* number */
+	MONO_TYPE_ARRAY = 0x14,       /* type, rank, boundsCount, bound1, loCount, lo1 */
+	MONO_TYPE_GENERICINST = 0x15,	   /* <type> <type-arg-count> <type-1> \x{2026} <type-n> */
+	MONO_TYPE_TYPEDBYREF = 0x16,
+	MONO_TYPE_I = 0x18,
+	MONO_TYPE_U = 0x19,
+	MONO_TYPE_FNPTR = 0x1b,	      /* arg: full method signature */
+	MONO_TYPE_OBJECT = 0x1c,
+	MONO_TYPE_SZARRAY = 0x1d,       /* 0-based one-dim-array */
+	MONO_TYPE_MVAR = 0x1e,       /* number */
+	MONO_TYPE_CMOD_REQD = 0x1f,       /* arg: typedef or typeref token */
+	MONO_TYPE_CMOD_OPT = 0x20,       /* optional arg: typedef or typref token */
+	MONO_TYPE_INTERNAL = 0x21,       /* CLR internal type */
+
+	MONO_TYPE_MODIFIER = 0x40,       /* Or with the following types */
+	MONO_TYPE_SENTINEL = 0x41,       /* Sentinel for varargs method signature */
+	MONO_TYPE_PINNED = 0x45,       /* Local var that points to pinned object */
+
+	MONO_TYPE_ENUM = 0x55        /* an enumeration */
+} MonoTypeEnum;
 
 struct MonoCustomMod {
 	unsigned int required : 1;
@@ -354,4 +400,138 @@ struct _MonoException {
 	gpointer* data;
 	MonoMethod* exception_ctor;
 	gpointer unity_extended_info;
+};
+
+#define MONO_PUBLIC_KEY_TOKEN_LENGTH	17
+
+struct MonoAssemblyName
+{
+	const char* name;
+	const char* culture;
+	const char* hash_value;
+	const guint8* public_key;
+	guchar public_key_token[MONO_PUBLIC_KEY_TOKEN_LENGTH];
+	guint32 hash_alg;
+	guint32 hash_len;
+	guint32 flags;
+	guint16 major, minor, build, revision;
+};
+
+/* This corresponds to System.Type */
+struct MonoReflectionType 
+{
+	MonoObject object;
+	MonoType* type;
+};
+
+struct MonoReflectionMethod 
+{
+	MonoObject object;
+	MonoMethod* method;
+	MonoString* name;
+	MonoReflectionType* reftype;
+};
+
+struct MonoDelegate 
+{
+	MonoObject object;
+	/* The compiled code of the target method */
+	gpointer method_ptr;
+	/* The invoke code */
+	gpointer invoke_impl;
+	MonoObject* target;
+	MonoMethod* method;
+	gpointer delegate_trampoline;
+	/* Extra argument passed to the target method in llvmonly mode */
+	gpointer extra_arg;
+	/*
+	 * If non-NULL, this points to a memory location which stores the address of
+	 * the compiled code of the method, or NULL if it is not yet compiled.
+	 */
+	guint8** method_code;
+	gpointer interp_method;
+	/* Interp method that is executed when invoking the delegate */
+	gpointer interp_invoke_impl;
+	MonoReflectionMethod* method_info;
+	MonoReflectionMethod* original_method_info;
+	MonoObject* data;
+	bool method_is_virtual;
+};
+
+typedef struct 
+{
+	guint32  flags;
+	gint32   exvar_offset;
+	gpointer try_start;
+	gpointer try_end;
+	gpointer handler_start;
+	/*
+	 * For LLVM compiled code, this is the index of the il clause
+	 * associated with this handler.
+	 */
+	int clause_index;
+	uint32_t try_offset;
+	uint32_t try_len;
+	uint32_t handler_offset;
+	uint32_t handler_len;
+	union {
+		MonoClass* catch_class;
+		gpointer filter;
+		gpointer handler_end;
+	} data;
+} MonoJitExceptionInfo;
+
+struct MonoJitInfo 
+{
+	/* NOTE: These first two elements (method and
+	   next_jit_code_hash) must be in the same order and at the
+	   same offset as in RuntimeMethod, because of the jit_code_hash
+	   internal hash table in MonoDomain. */
+	union {
+		MonoMethod* method;
+		MonoImage* image;
+		void* aot_info;
+		void* tramp_info;
+	} d;
+	union {
+		MonoJitInfo* next_jit_code_hash;
+		MonoJitInfo* next_tombstone;
+	} n;
+	gpointer    code_start;
+	guint32     unwind_info;
+	int         code_size;
+	guint32     num_clauses : 15;
+	/* Whenever the code is domain neutral or 'shared' */
+	gboolean    domain_neutral : 1;
+	gboolean    has_generic_jit_info : 1;
+	gboolean    has_try_block_holes : 1;
+	gboolean    has_arch_eh_info : 1;
+	gboolean    has_thunk_info : 1;
+	gboolean    has_unwind_info : 1;
+	gboolean    from_aot : 1;
+	gboolean    from_llvm : 1;
+	gboolean    dbg_attrs_inited : 1;
+	gboolean    dbg_hidden : 1;
+	/* Whenever this jit info was loaded in async context */
+	gboolean    async : 1;
+	gboolean    dbg_step_through : 1;
+	gboolean    dbg_non_user_code : 1;
+	/*
+	 * Whenever this jit info refers to a trampoline.
+	 * d.tramp_info contains additional data in this case.
+	 */
+	gboolean    is_trampoline : 1;
+	/* Whenever this jit info refers to an interpreter method */
+	gboolean    is_interp : 1;
+
+	/* FIXME: Embed this after the structure later*/
+	gpointer    gc_info; /* Currently only used by SGen */
+
+	gpointer    seq_points;
+
+	MonoJitExceptionInfo clauses[MONO_ZERO_LEN_ARRAY];
+	/* There is an optional MonoGenericJitInfo after the clauses */
+	/* There is an optional MonoTryBlockHoleTableJitInfo after MonoGenericJitInfo clauses*/
+	/* There is an optional MonoArchEHJitInfo after MonoTryBlockHoleTableJitInfo */
+	/* There is an optional MonoThunkJitInfo after MonoArchEHJitInfo */
 };
