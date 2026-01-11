@@ -1789,6 +1789,9 @@ fun:
 	y1f
 	yn
 	ynf
+	sincosf
+
+obj:
 	_ZGVZNSt13basic_filebufIcSt11char_traitsIcEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
 	_ZGVZNSt13basic_filebufIwSt11char_traitsIwEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
 	_ZZNSt13basic_filebufIcSt11char_traitsIcEE5_InitEP7__sFILENS2_7_InitflEE7_Stinit
@@ -1798,12 +1801,9 @@ fun:
 	_ZTVSt13basic_istreamIwSt11char_traitsIwEE
 	_ZTVSt13basic_ostreamIwSt11char_traitsIwEE
 	_ZTVSt5ctypeIcE
-    _ZTVSt5ctypeIwE
+	_ZTVSt5ctypeIwE
 	_ZTISt8bad_cast
 	_ZTINSt8ios_base7failureE
-	sincosf
-	
-obj:
 	__cleanup
 	__fe_dfl_env
 	__isthreaded
@@ -2412,7 +2412,6 @@ obj:
 	_ZTVSt12out_of_range
 	_ZTVSt12system_error
 	_ZTVSt13bad_exception
-	
 	_ZTVSt13runtime_error
 	_ZTVSt14error_category
 	_ZTVSt14overflow_error
