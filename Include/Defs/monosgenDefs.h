@@ -35,6 +35,12 @@ typedef gint32 mono_array_lower_bound_t;
 #   define USE_UINT8_BIT_FIELD(type, field) type field
 #endif
 
+typedef struct _GPtrArray GPtrArray;
+struct _GPtrArray {
+	gpointer* pdata;
+	guint len;
+};
+
 struct MonoDomain;
 struct MonoAssembly;
 struct MonoImage;
@@ -60,7 +66,7 @@ struct MonoType;
 struct MonoMethod;
 struct MonoVTable;
 
-typedef enum MonoTypeEnum
+typedef enum
 {
 	MONO_TYPE_END = 0x00,       /* End of List */
 	MONO_TYPE_VOID = 0x01,
@@ -100,7 +106,7 @@ typedef enum MonoTypeEnum
 	MONO_TYPE_PINNED = 0x45,       /* Local var that points to pinned object */
 
 	MONO_TYPE_ENUM = 0x55        /* an enumeration */
-};
+} MonoTypeEnum;
 
 struct MonoCustomMod {
 	unsigned int required : 1;
@@ -409,4 +415,123 @@ struct MonoAssemblyName
 	guint32 hash_len;
 	guint32 flags;
 	guint16 major, minor, build, revision;
+};
+
+/* This corresponds to System.Type */
+struct MonoReflectionType 
+{
+	MonoObject object;
+	MonoType* type;
+};
+
+struct MonoReflectionMethod 
+{
+	MonoObject object;
+	MonoMethod* method;
+	MonoString* name;
+	MonoReflectionType* reftype;
+};
+
+struct MonoDelegate 
+{
+	MonoObject object;
+	/* The compiled code of the target method */
+	gpointer method_ptr;
+	/* The invoke code */
+	gpointer invoke_impl;
+	MonoObject* target;
+	MonoMethod* method;
+	gpointer delegate_trampoline;
+	/* Extra argument passed to the target method in llvmonly mode */
+	gpointer extra_arg;
+	/*
+	 * If non-NULL, this points to a memory location which stores the address of
+	 * the compiled code of the method, or NULL if it is not yet compiled.
+	 */
+	guint8** method_code;
+	gpointer interp_method;
+	/* Interp method that is executed when invoking the delegate */
+	gpointer interp_invoke_impl;
+	MonoReflectionMethod* method_info;
+	MonoReflectionMethod* original_method_info;
+	MonoObject* data;
+	bool method_is_virtual;
+};
+
+typedef struct 
+{
+	guint32  flags;
+	gint32   exvar_offset;
+	gpointer try_start;
+	gpointer try_end;
+	gpointer handler_start;
+	/*
+	 * For LLVM compiled code, this is the index of the il clause
+	 * associated with this handler.
+	 */
+	int clause_index;
+	uint32_t try_offset;
+	uint32_t try_len;
+	uint32_t handler_offset;
+	uint32_t handler_len;
+	union {
+		MonoClass* catch_class;
+		gpointer filter;
+		gpointer handler_end;
+	} data;
+} MonoJitExceptionInfo;
+
+struct MonoJitInfo 
+{
+	/* NOTE: These first two elements (method and
+	   next_jit_code_hash) must be in the same order and at the
+	   same offset as in RuntimeMethod, because of the jit_code_hash
+	   internal hash table in MonoDomain. */
+	union {
+		MonoMethod* method;
+		MonoImage* image;
+		void* aot_info;
+		void* tramp_info;
+	} d;
+	union {
+		MonoJitInfo* next_jit_code_hash;
+		MonoJitInfo* next_tombstone;
+	} n;
+	gpointer    code_start;
+	guint32     unwind_info;
+	int         code_size;
+	guint32     num_clauses : 15;
+	/* Whenever the code is domain neutral or 'shared' */
+	gboolean    domain_neutral : 1;
+	gboolean    has_generic_jit_info : 1;
+	gboolean    has_try_block_holes : 1;
+	gboolean    has_arch_eh_info : 1;
+	gboolean    has_thunk_info : 1;
+	gboolean    has_unwind_info : 1;
+	gboolean    from_aot : 1;
+	gboolean    from_llvm : 1;
+	gboolean    dbg_attrs_inited : 1;
+	gboolean    dbg_hidden : 1;
+	/* Whenever this jit info was loaded in async context */
+	gboolean    async : 1;
+	gboolean    dbg_step_through : 1;
+	gboolean    dbg_non_user_code : 1;
+	/*
+	 * Whenever this jit info refers to a trampoline.
+	 * d.tramp_info contains additional data in this case.
+	 */
+	gboolean    is_trampoline : 1;
+	/* Whenever this jit info refers to an interpreter method */
+	gboolean    is_interp : 1;
+
+	/* FIXME: Embed this after the structure later*/
+	gpointer    gc_info; /* Currently only used by SGen */
+
+	gpointer    seq_points;
+
+	MonoJitExceptionInfo clauses[MONO_ZERO_LEN_ARRAY];
+	/* There is an optional MonoGenericJitInfo after the clauses */
+	/* There is an optional MonoTryBlockHoleTableJitInfo after MonoGenericJitInfo clauses*/
+	/* There is an optional MonoArchEHJitInfo after MonoTryBlockHoleTableJitInfo */
+	/* There is an optional MonoThunkJitInfo after MonoArchEHJitInfo */
 };

@@ -24,12 +24,12 @@ extern "C" {
 	void sceKernelIccIndicatorStandby();
 	void sceKernelIccIndicatorStandbyBoot();
 	void sceKernelIccIndicatorStandbyShutdown();
-	void sceKernelIccSetBuzzer(enum BuzzerType mode);
+	int sceKernelIccSetBuzzer(enum BuzzerType mode);
 	int sceKernelGetCpuTemperature(int* Temperature);
 	int sceKernelGetSocSensorTemperature(int, int* Temperature);
 	const char* sceKernelGetFsSandboxRandomWord();
 	int sceKernelGetSystemSwVersion(SceKernelSwVersion* version);
-	uint64_t sceKernelGetMainSocId();
+	uint32_t sceKernelGetMainSocId();
 	bool sceKernelIsCEX();
 	bool sceKernelIsGenuineCEX();
 	bool sceKernelIsDevKit();
@@ -39,6 +39,8 @@ extern "C" {
 	bool sceKernelIsGenuineN();
 	bool sceKernelGetSystemLevelDebuggerModeForRcmgr();
 	int sceKernelError(int error);
+	int sceKernelGetHwModelName(char* modelName);
+	int sceKernelGetHwSerialNumber(char* serialNumber);
 
 	int get_page_table_stats(int vm, unsigned long long Table, int* totalOut, int* AvailableOut);
 	int sysctlbyname(const char* name, void* oldp, size_t* oldlenp, const void* newp, size_t newlen);
