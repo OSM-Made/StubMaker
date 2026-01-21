@@ -16,14 +16,21 @@ extern "C" {
 	MonoDomain* mono_domain_create_appdomain(char* friendly_name, char* configuration_file);
 	void mono_domain_unload(MonoDomain* domain);
 	GPtrArray* mono_domain_get_assemblies(MonoDomain* domain, gboolean refonly);
+	bool mono_domain_finalize(MonoDomain* domain, uint32_t timeout);
 
 	// ============================================================================
 	// Assembly Functions
 	// ============================================================================
 
+	MonoImage* mono_image_open_from_data_full(char* data, uint32_t data_len, bool need_copy, MonoImageOpenStatus* status, bool refonly);
+	MonoImage* mono_image_open_from_data(char* data, uint32_t data_len, bool need_copy, MonoImageOpenStatus* status);
+	MonoAssembly* mono_assembly_load_from_full(MonoImage* image, const char* fname, MonoImageOpenStatus* status, bool refonly);
+	MonoAssembly* mono_assembly_load_from(MonoImage* image, const char* fname, MonoImageOpenStatus* status);
+	void mono_image_close(MonoImage* image);
 	MonoAssembly* mono_assembly_open(const char* filename, void* status);
 	MonoAssembly* mono_domain_assembly_open(MonoDomain* domain, const char* name);
 	MonoImage* mono_assembly_get_image(MonoAssembly* assembly);
+	MonoAssembly* mono_assembly_loaded(const char* name);
 	const char* mono_image_get_name(MonoImage* image);
 	MonoAssembly* mono_image_get_assembly(MonoImage* image);
 	MonoAssemblyName* mono_assembly_get_name(MonoAssembly* assembly);
@@ -97,7 +104,9 @@ extern "C" {
 
 	const char* mono_method_get_name(MonoMethod* method);
 	MonoClass* mono_method_get_class(MonoMethod* method);
+	MonoType* mono_signature_get_params(MonoMethodSignature* sig, gpointer* iter);
 	MonoMethodSignature* mono_method_signature(MonoMethod* method);
+	MonoType* mono_signature_get_return_type(MonoMethodSignature* signature);
 	uint32_t mono_method_get_flags(MonoMethod* method, uint32_t* iflags);
 
 	// Method invocation
@@ -202,6 +211,7 @@ extern "C" {
 	void mono_free(void* obj);
 
 	MonoJitInfo* mono_jit_info_table_find(MonoDomain * domain, gpointer addr);
+	void* mono_jit_info_get_code_start(MonoJitInfo * ji);
 	
 #ifdef __cplusplus
 }
