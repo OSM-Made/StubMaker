@@ -15,6 +15,8 @@ extern "C" {
 	int sceShellCoreUtilExitMiniAppWithValue(const char* value);
 	int sceShellCoreUtilGetFreeSizeOfUserPartition(uint64_t* free, uint64_t* total);
 	int sceShellCoreUtilLaunchByUri(const char* uri, sceShellCoreUtilLaunchParam* a2);
+	int sceShellCoreUtilNotificationRequestedForIDU(int notifyId, int notifyMode, const char* message);
+	int sceShellCoreUtilNotificationCancelForIDU(int notifyId);
 
 #ifdef __cplusplus
 }
