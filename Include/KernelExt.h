@@ -56,6 +56,7 @@ extern "C" {
 	int sceDbgRemoveExceptionHandler(int en);
 	int sigaction(int, struct sigaction*, struct sigaction*);
 	int sigemptyset(sigset_t* set);
+	int kill(int pid, int sig);
 
 	// thread
 	int pthread_create_name_np(thread* thr, pthread_attr* attr, void*(*entry)(void*), void* arg, const char* name);
