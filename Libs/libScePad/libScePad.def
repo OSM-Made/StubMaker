@@ -1,2 +1,4 @@
 fun:
     scePadGetDeviceId
+    scePadGetDeviceInfo
+    scePadGetVersionInfo
