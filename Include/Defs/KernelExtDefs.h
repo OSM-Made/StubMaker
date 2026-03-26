@@ -27,7 +27,7 @@ extern "C" {
 		MessageAddressing = 14,
 		MessageAddressingDeviceId = 15,
 		MessageAddressingUserName = 16,
-		MessageAddressingUserId, = 17,
+		MessageAddressingUserId = 17,
 
 		DebugMessage = 100,
 		TrcCheckMessage = 101,
