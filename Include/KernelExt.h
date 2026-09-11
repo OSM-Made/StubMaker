@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-	int sceKernelSendNotificationRequest(int device, void* req, size_t size, int blocking);
+	int sceKernelSendNotificationRequest(int api, void* buffer, size_t size, bool blocking);
 	int sceKernelGetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetProcessName(const char* name);
@@ -41,6 +41,11 @@ extern "C" {
 	int sceKernelError(int error);
 	int sceKernelGetHwModelName(char* modelName);
 	int sceKernelGetHwSerialNumber(char* serialNumber);
+	int sceKernelPrepareToResumeProcess(int pid);
+	int sceKernelPrepareToSuspendProcess(int pid);
+	int sceKernelResumeProcess(int pid);
+	int sceKernelSuspendProcess(int pid);
+	int sceKernelTerminateProcess(int pid, int* result);
 
 	int get_page_table_stats(int vm, unsigned long long Table, int* totalOut, int* AvailableOut);
 	int sysctlbyname(const char* name, void* oldp, size_t* oldlenp, const void* newp, size_t newlen);

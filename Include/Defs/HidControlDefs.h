@@ -6,7 +6,8 @@ extern "C" {
 
     enum SceHidBatteryStatus
     {
-        // Charging = 2 ?
+        BATTERY_STATUS_CHARGING = 1,
+        BATTERY_STATUS_FULLCHARGED = 2,
     };
 
     struct SceHidBatteryState
@@ -16,7 +17,7 @@ extern "C" {
     };
 
 #pragma pack(push, 1)
-    struct SceHidDeviceInfo // Unfinished
+    struct SceHidDeviceInfo
     {
         int _0x00; // type ?
         int deviceId; // 0x04

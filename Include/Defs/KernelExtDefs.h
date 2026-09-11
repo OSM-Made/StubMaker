@@ -10,51 +10,93 @@ extern "C" {
 	// Enum Credits - OSM-Made
 	enum SceNotificationRequestType
 	{
-		NotificationRequest = 0,
-		SystemNotification = 1,
-		SystemNotificationWithUserId = 2,
-		SystemNotificationWithDeviceId = 3,
-		SystemNotificationWithDeviceIdRelatedToUser = 4,
-		SystemNotificationWithText = 5,
-		SystemNotificationWithTextRelatedToUser = 6,
-		SystemNotificationWithErrorCode = 7,
-		SystemNotificationWithAppId = 8,
-		SystemNotificationWithAppName = 9,
-		SystemNotificationWithAppInfo = 9,
-		SystemNotificationWithAppNameRelatedToUser = 10,
-		SystemNotificationWithParams = 11,
-		SendSystemNotificationWithUserName = 12,
-		SystemNotificationWithUserNameInfo = 13,
-		SendAddressingSystemNotification = 14,
-		AddressingSystemNotificationWithDeviceId = 15,
-		AddressingSystemNotificationWithUserName = 16,
-		AddressingSystemNotificationWithUserId = 17,
+		Message = 0,
+		MessageMsgId = 1,
+		MessageUserId = 2,
+		MessageDeviceId = 3,
+		MessageDeviceIdRelatedToUser = 4,
+		MessageText = 5,
+		MessageTextRelatedToUser = 6,
+		MessageErrorCode = 7,
+		MessageAppId = 8,
+		MessageAppInfo = 9,
+		MessageTitleRelatedToUser = 10,
+		MessageParams = 11,
+		MessageUserName = 12,
+		MessageUserNameInfo = 13,
+		MessageAddressing = 14,
+		MessageAddressingDeviceId = 15,
+		MessageAddressingUserName = 16,
+		MessageAddressingUserId = 17,
 
-		UNK_1 = 100,
-		TrcCheckNotificationRequest = 101,
-		NpDebugNotificationRequest = 102,
-		UNK_2 = 102,
+		DebugMessage = 100,
+		TrcCheckMessage = 101,
+		NpDebugMessage = 102,
+		WebDebugMessage = 102,
+		UNK_103 = 103,
+	};
+
+	enum SystemNotificationPriority
+	{
+		Default = 0,
+		High = 1,
+		Special = -1
+	};
+
+	enum SystemNotificationAttribute
+	{
+		ShowVideoPlayback = 1,
+		ShowVR = 2,
+		ShowKratos = 4,
+		All = 7,
+	};
+
+	enum NotificationAPI
+	{
+		ToastPopup = 0,
+		NotifyDatabase = 1,
 	};
 
 	// Struct Credits - OSM-Made
-	typedef struct
+#pragma pack(push, 1)
+	struct SceNotificationRequest
 	{
-		enum SceNotificationRequestType type;
-		int reqId;
-		int priority;
-		int msgId;
-		int targetId;
-		int userId;
-		int unk1;
-		int unk2;
-		int appId;
-		int errorNum;
-		int unk3;
-		unsigned char useIconImageUri;
-		char message[1024];
-		char iconUri[1024];
-		char unk[1024];
-	} SceNotificationRequest;
+		enum SceNotificationRequestType Type;   // 0x00
+		uint32_t ReqId;            				// 0x04
+		uint32_t Priority;						// 0x08
+		uint32_t MsgId;            				// 0x0C
+		uint32_t TargetId;						// 0x10
+		uint32_t UserId;						// 0x14
+		uint32_t DeviceId;						// 0x18
+		uint32_t AddressingUserId;				// 0x1C
+		uint32_t AppId;            				// 0x20
+		uint32_t ErrorNumber;					// 0x24
+		uint32_t Attribute;						// 0x28
+		uint8_t  HasIcon;						// 0x2C
+		union
+		{
+			struct
+			{
+				char Message[0x400];			// 0x2D
+				char IconImageUri[0x800];		// 0x42D
+			};
+
+			struct
+			{
+				char arg1[180];					// 0x2D
+				char arg2[180];					// 0xE1
+				char arg3[180];					// 0x195
+
+			};
+
+			struct	// Ensure proper size.
+			{
+				char buffer[0xC03];				// 0x2D
+			};
+		};
+	};
+#pragma pack(pop)
+	static_assert(sizeof(SceNotificationRequest) == 0xC30, "Size of SceNotificationRequest is not 0xC30");
 
 	typedef struct
 	{
