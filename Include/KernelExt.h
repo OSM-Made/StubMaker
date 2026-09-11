@@ -11,7 +11,6 @@ extern "C" {
 	int sceKernelGetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetAppInfo(int pid, SceAppInfo* info);
 	int sceKernelSetProcessName(const char* name);
-	int sceKernelTerminateProcess(int pid, int* result);
 	int sceKernelGetThreadName(uint32_t tid, char* out);
 	int sceKernelDebugOutText(int dbg_channel, const char* text, ...);
 	int sceKernelGetProcessName(int pid, char* out);
@@ -42,6 +41,11 @@ extern "C" {
 	int sceKernelError(int error);
 	int sceKernelGetHwModelName(char* modelName);
 	int sceKernelGetHwSerialNumber(char* serialNumber);
+	int sceKernelPrepareToResumeProcess(int pid);
+	int sceKernelPrepareToSuspendProcess(int pid);
+	int sceKernelResumeProcess(int pid);
+	int sceKernelSuspendProcess(int pid);
+	int sceKernelTerminateProcess(int pid, int* result);
 
 	int get_page_table_stats(int vm, unsigned long long Table, int* totalOut, int* AvailableOut);
 	int sysctlbyname(const char* name, void* oldp, size_t* oldlenp, const void* newp, size_t newlen);
